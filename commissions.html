@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Samuel Harris | Commissions</title>
+  <meta name="description" content="Commissions by Samuel Harris." />
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Samuel Harris</a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Photo</a>
+        <a href="commissions.html" aria-current="page">Commissions</a>
+        <a href="about.html">About</a>
+        <a href="mailto:samuel.harris9005@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="section">
+      <p class="eyebrow">Selected work</p>
+      <h1 class="section-title">Commissions</h1>
+      <div class="commission-tiles">
+        <a class="commission-tile" href="commissions-100gecs.html">
+          <img src="assets/Commissions/100Gecs/1.webp" alt="100 Gecs commission cover" loading="lazy" decoding="async" />
+          <span class="commission-caption">100 Gecs</span>
+        </a>
+        <a class="commission-tile" href="commissions-porches.html">
+          <img src="assets/Commissions/Porches/1.webp" alt="Porches commission cover" loading="lazy" decoding="async" />
+          <span class="commission-caption">Porches</span>
+        </a>
+        <a class="commission-tile" href="commissions-shrekrave.html">
+          <img src="assets/Commissions/ShrekRave/1.webp" alt="Shrek Rave commission cover" loading="lazy" decoding="async" />
+          <span class="commission-caption">Shrek Rave</span>
+        </a>
+        <a class="commission-tile" href="commissions-vsco.html">
+          <img src="assets/Commissions/VSCO/1.webp" alt="VSCO commission cover" loading="lazy" decoding="async" />
+          <span class="commission-caption">VSCO</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer" role="contentinfo">
+      <p>© <span id="year"></span> Samuel Harris</p>
+    </footer>
+  </main>
+
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

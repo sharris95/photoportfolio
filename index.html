@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Samuel Harris | Photography</title>
+  <meta name="description" content="Photography by Samuel Harris." />
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Samuel Harris</a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" aria-current="page">Photo</a>
+        <a href="commissions.html">Commissions</a>
+        <a href="about.html">About</a>
+        <a href="mailto:samuel.harris9005@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="stream" aria-label="Photo stream">
+      <figure class="shot">
+        <img src="assets/1.png" alt="Photograph 1" loading="eager" decoding="async" />
+      </figure>
+
+      <figure class="shot"><img src="assets/2.png" alt="Photograph 2" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/3.png" alt="Photograph 3" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/4.png" alt="Photograph 4" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/5.png" alt="Photograph 5" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/6.png" alt="Photograph 6" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/7.png" alt="Photograph 7" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/8.png" alt="Photograph 8" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/9.png" alt="Photograph 9" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/10.png" alt="Photograph 10" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/11.png" alt="Photograph 11" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/12.png" alt="Photograph 12" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/13.png" alt="Photograph 13" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/14.png" alt="Photograph 14" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/15.png" alt="Photograph 15" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/16.png" alt="Photograph 16" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/17.png" alt="Photograph 17" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/18.png" alt="Photograph 18" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/19.png" alt="Photograph 19" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/20.jpg" alt="Photograph 20" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/21.png" alt="Photograph 21" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/22.png" alt="Photograph 22" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/23.png" alt="Photograph 23" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/24.png" alt="Photograph 24" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/25.png" alt="Photograph 25" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/26.png" alt="Photograph 26" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/27.png" alt="Photograph 27" loading="lazy" decoding="async" /></figure>
+      <figure class="shot"><img src="assets/28.png" alt="Photograph 28" loading="lazy" decoding="async" /></figure>
+    </section>
+
+    <footer class="site-footer" role="contentinfo">
+      <p>© <span id="year"></span> Samuel Harris</p>
+    </footer>
+  </main>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" type="button">Close</button>
+    <img src="" alt="" />
+  </div>
+
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const streamImages = Array.from(document.querySelectorAll(".stream img"));
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".lightbox-close");
+    let currentIndex = 0;
+
+    const setImage = (index) => {
+      currentIndex = (index + streamImages.length) % streamImages.length;
+      const img = streamImages[currentIndex];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || "Photo";
+    };
+
+    const openLightbox = (index) => {
+      setImage(index);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    const step = (delta) => {
+      setImage(currentIndex + delta);
+    };
+
+    streamImages.forEach((img, index) => {
+      img.addEventListener("click", () => openLightbox(index));
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    lightboxImg.addEventListener("click", (event) => {
+      const rect = lightboxImg.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      if (x < rect.width / 2) {
+        step(-1);
+      } else {
+        step(1);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
+    });
+  </script>
+</body>
+</html>
