@@ -333,6 +333,7 @@ footer small{
 
   .stream{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 3vw, 18px);
   }
 
   .commission-tiles{
