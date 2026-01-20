@@ -41,12 +41,69 @@
     </footer>
   </main>
 
+  <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" type="button">Close</button>
+    <button class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous photo">←</button>
+    <img src="" alt="" />
+    <button class="lightbox-arrow lightbox-next" type="button" aria-label="Next photo">→</button>
+  </div>
+
   <script>
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
     window.scrollTo(0, 0);
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const streamImages = Array.from(document.querySelectorAll(".stream img"));
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".lightbox-close");
+    const prevBtn = lightbox.querySelector(".lightbox-prev");
+    const nextBtn = lightbox.querySelector(".lightbox-next");
+    let currentIndex = 0;
+
+    const setImage = (index) => {
+      currentIndex = (index + streamImages.length) % streamImages.length;
+      const img = streamImages[currentIndex];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || "Photo";
+    };
+
+    const openLightbox = (index) => {
+      setImage(index);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    const step = (delta) => {
+      setImage(currentIndex + delta);
+    };
+
+    streamImages.forEach((img, index) => {
+      img.addEventListener("click", () => openLightbox(index));
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    prevBtn.addEventListener("click", () => step(-1));
+    nextBtn.addEventListener("click", () => step(1));
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
+    });
   </script>
 </body>
 </html>
