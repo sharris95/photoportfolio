@@ -228,20 +228,28 @@ main img{
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 3vw, 36px);
   margin-top: clamp(20px, 3vw, 36px);
-  background: #fff;
-  padding: clamp(18px, 3vw, 36px);
 }
 
 .commission-tile{
   display: grid;
   gap: 10px;
+  color: inherit;
 }
 
 .commission-tile img{
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  background: #fff;
+  background: transparent;
+  display: block;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+.commission-tile img:hover,
+.commission-tile:focus-visible img{
+  transform: translateY(-4px) scale(1.01);
+  filter: saturate(1.04) contrast(1.03);
 }
 
 .commission-caption{
@@ -304,7 +312,6 @@ figcaption{
 
 /* ---------- Footer (optional) ---------- */
 footer{
-  border-top: 1px solid var(--border);
   padding-block: 22px;
 }
 footer small{
