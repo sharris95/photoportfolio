@@ -408,4 +408,8 @@ footer small{
     gap: 16px;
     padding: 16px;
   }
+
+  .commission-tile img{
+    object-fit: cover;
+  }
 }
