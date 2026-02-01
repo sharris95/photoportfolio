@@ -86,6 +86,7 @@
     const prevBtn = lightbox.querySelector(".lightbox-prev");
     const nextBtn = lightbox.querySelector(".lightbox-next");
     let currentIndex = 0;
+    const lightboxEnabled = !window.matchMedia("(max-width: 560px)").matches;
 
     const setImage = (index) => {
       currentIndex = (index + streamImages.length) % streamImages.length;
@@ -111,33 +112,37 @@
       setImage(currentIndex + delta);
     };
 
-    streamImages.forEach((img, index) => {
-      img.addEventListener("click", () => openLightbox(index));
-    });
+    if (lightboxEnabled) {
+      streamImages.forEach((img, index) => {
+        img.addEventListener("click", () => openLightbox(index));
+      });
 
-    closeBtn.addEventListener("click", closeLightbox);
-    prevBtn.addEventListener("click", () => step(-1));
-    nextBtn.addEventListener("click", () => step(1));
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
+      closeBtn.addEventListener("click", closeLightbox);
+      prevBtn.addEventListener("click", () => step(-1));
+      nextBtn.addEventListener("click", () => step(1));
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
 
-    lightboxImg.addEventListener("click", (event) => {
-      const rect = lightboxImg.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      if (x < rect.width / 2) {
-        step(-1);
-      } else {
-        step(1);
-      }
-    });
+      lightboxImg.addEventListener("click", (event) => {
+        const rect = lightboxImg.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        if (x < rect.width / 2) {
+          step(-1);
+        } else {
+          step(1);
+        }
+      });
 
-    document.addEventListener("keydown", (event) => {
-      if (!lightbox.classList.contains("is-open")) return;
-      if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowLeft") step(-1);
-      if (event.key === "ArrowRight") step(1);
-    });
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (event.key === "Escape") closeLightbox();
+        if (event.key === "ArrowLeft") step(-1);
+        if (event.key === "ArrowRight") step(1);
+      });
+    } else {
+      lightbox.setAttribute("aria-hidden", "true");
+    }
   </script>
 </body>
 </html>

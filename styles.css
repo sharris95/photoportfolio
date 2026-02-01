@@ -395,8 +395,12 @@ footer small{
   }
 
   .stream{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(12px, 3vw, 18px);
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 6vw, 32px);
+  }
+
+  .stream .shot img{
+    cursor: default;
   }
 
   .commission-tiles{
