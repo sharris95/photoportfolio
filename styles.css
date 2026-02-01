@@ -183,6 +183,10 @@ main{
   padding-block: clamp(18px, 2.2vw, 28px) clamp(80px, 10vw, 140px);
 }
 
+.section-title-centered{
+  text-align: center;
+}
+
 .eyebrow a{
   display: inline-flex;
   align-items: center;
