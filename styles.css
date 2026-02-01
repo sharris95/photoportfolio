@@ -405,6 +405,10 @@ footer small{
 
   .stream .shot img{
     cursor: default;
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
+    background: transparent;
   }
 
   .commission-tiles{
